@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rottweiler Puppy Training</title>
+
+    <!-- Fonts: Outfit from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES (THEME)
+           Warm Cream + Forest Green — "Earthy Modern"
+           Change these to restyle the whole presentation
+           =========================================== */
+        :root {
+            /* Colors */
+            --bg-primary: #f4f0e8;
+            --bg-accent: #2c3e3a;
+            --bg-card: rgba(44, 62, 58, 0.06);
+            --bg-card-border: rgba(44, 62, 58, 0.1);
+            --text-primary: #1a2a26;
+            --text-secondary: #6b7c76;
+            --text-on-accent: #f4f0e8;
+            --accent-green: #5a8a6c;
+            --accent-sage: #8ab49c;
+            --accent-gold: #a09060;
+            --accent-blue: #6a8a9a;
+            --accent-brown: #9a7a5a;
+
+            /* Typography — all clamp() */
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --title-size: clamp(2rem, 6vw, 5rem);
+            --h2-size: clamp(1.5rem, 4vw, 3rem);
+            --h3-size: clamp(1rem, 2vw, 1.4rem);
+            --subtitle-size: clamp(0.875rem, 1.5vw, 1.15rem);
+            --body-size: clamp(0.75rem, 1.2vw, 1rem);
+            --small-size: clamp(0.65rem, 0.9vw, 0.8rem);
+
+            /* Spacing */
+            --slide-padding: clamp(1.5rem, 5vw, 5rem);
+            --content-gap: clamp(0.75rem, 2vw, 2rem);
+            --element-gap: clamp(0.25rem, 1vw, 1rem);
+
+            /* Animation */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+        }
+
+        /* ===========================================
+           BASE STYLES
+           =========================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* ===========================================
+           VIEWPORT FITTING: MANDATORY BASE STYLES
+           =========================================== */
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        /* Each slide = exact viewport height */
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Content container */
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            overflow: hidden;
+            padding: var(--slide-padding);
+        }
+
+        /* Cards/containers */
+        .card, .container, .content-box {
+            max-width: min(90vw, 1000px);
+            max-height: min(80vh, 700px);
+        }
+
+        /* Lists */
+        .feature-list, .bullet-list {
+            gap: clamp(0.4rem, 1vh, 1rem);
+        }
+        .feature-list li, .bullet-list li {
+            font-size: var(--body-size);
+            line-height: 1.4;
+        }
+
+        /* Grids */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(0.5rem, 1.5vw, 1rem);
+        }
+
+        /* Images */
+        img, .image-container {
+            max-width: 100%;
+            max-height: min(50vh, 400px);
+            object-fit: contain;
+        }
+
+        /* --- RESPONSIVE BREAKPOINTS --- */
+        @media (max-height: 700px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 3vw, 2rem);
+                --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+                --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+                --h2-size: clamp(1rem, 3vw, 1.75rem);
+            }
+        }
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+                --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+                --title-size: clamp(1.1rem, 4vw, 2rem);
+                --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+            }
+            .nav-dots, .keyboard-hint, .decorative { display: none; }
+        }
+        @media (max-height: 500px) {
+            :root {
+                --slide-padding: clamp(0.4rem, 2vw, 1rem);
+                --title-size: clamp(1rem, 3.5vw, 1.5rem);
+                --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
+                --body-size: clamp(0.65rem, 1vw, 0.85rem);
+            }
+        }
+        @media (max-width: 600px) {
+            :root { --title-size: clamp(1.25rem, 7vw, 2.5rem); }
+            .grid { grid-template-columns: 1fr; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+
+        /* ===========================================
+           PRESENTATION THEME — EARTHY MODERN
+           =========================================== */
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .slide {
+            background: var(--bg-primary);
+            font-family: var(--font-body);
+        }
+
+        /* Subtle background texture */
+        .slide::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(90, 124, 106, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(200, 180, 140, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Dark-background slides */
+        .slide--dark {
+            background: var(--bg-accent);
+            color: var(--text-on-accent);
+        }
+        .slide--dark::before {
+            background:
+                radial-gradient(ellipse at 15% 80%, rgba(138, 180, 156, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 20%, rgba(160, 144, 96, 0.06) 0%, transparent 50%);
+        }
+
+        /* ===========================================
+           TYPOGRAPHY
+           =========================================== */
+        h1 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: var(--title-size);
+            line-height: 1.0;
+            color: var(--text-primary);
+        }
+        h2 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: var(--h2-size);
+            line-height: 1.1;
+            color: var(--text-primary);
+        }
+        h3 {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: var(--h3-size);
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+        .slide--dark h1,
+        .slide--dark h2,
+        .slide--dark h3 { color: var(--text-on-accent); }
+
+        p, li {
+            font-size: var(--body-size);
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        .slide--dark p,
+        .slide--dark li { color: rgba(244, 240, 232, 0.7); }
+
+        /* ===========================================
+           COMPONENTS
+           =========================================== */
+
+        /* Tag pill */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: clamp(0.3rem, 0.5vw, 0.5rem);
+            background: var(--bg-accent);
+            color: var(--text-on-accent);
+            padding: clamp(0.2rem, 0.4vh, 0.35rem) clamp(0.6rem, 1vw, 1rem);
+            border-radius: 100px;
+            font-size: var(--small-size);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            width: fit-content;
+        }
+        .slide--dark .tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-sage);
+        }
+        .tag-dot {
+            width: clamp(4px, 0.5vw, 7px);
+            height: clamp(4px, 0.5vw, 7px);
+            background: var(--accent-sage);
+            border-radius: 50%;
+        }
+
+        /* Badge pills */
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(0.3rem, 0.6vw, 0.6rem);
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: clamp(0.25rem, 0.4vw, 0.4rem);
+            padding: clamp(0.3rem, 0.5vh, 0.45rem) clamp(0.6rem, 1vw, 1rem);
+            border-radius: 100px;
+            font-weight: 500;
+            font-size: var(--small-size);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--bg-card-border);
+        }
+        .slide--dark .badge {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(244, 240, 232, 0.7);
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+        .badge-dot {
+            width: clamp(4px, 0.5vw, 6px);
+            height: clamp(4px, 0.5vw, 6px);
+            border-radius: 50%;
+        }
+
+        /* Feature cards */
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            border-radius: clamp(8px, 1.2vw, 16px);
+            padding: clamp(0.8rem, 2vw, 1.5rem);
+        }
+        .slide--dark .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        .feature-card-icon {
+            width: clamp(28px, 3vw, 40px);
+            height: clamp(28px, 3vw, 40px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(0.8rem, 1.2vw, 1.1rem);
+            margin-bottom: clamp(0.4rem, 0.8vh, 0.7rem);
+        }
+
+        /* Bullet list */
+        .content-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.4rem, 1vh, 0.8rem);
+        }
+        .content-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: clamp(0.4rem, 0.7vw, 0.7rem);
+        }
+        .content-list li::before {
+            content: '';
+            flex-shrink: 0;
+            width: clamp(5px, 0.6vw, 8px);
+            height: clamp(5px, 0.6vw, 8px);
+            background: var(--accent-sage);
+            border-radius: 50%;
+            margin-top: clamp(0.35rem, 0.7vw, 0.5rem);
+        }
+        .slide--dark .content-list li::before {
+            background: var(--accent-sage);
+        }
+
+        /* Section number */
+        .section-num {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+            letter-spacing: 0.1em;
+            color: var(--accent-sage);
+            margin-bottom: clamp(0.3rem, 0.8vh, 0.6rem);
+        }
+
+        /* Subtitle text */
+        .subtitle {
+            font-weight: 400;
+            font-size: var(--subtitle-size);
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .slide--dark .subtitle { color: rgba(244, 240, 232, 0.6); }
+
+        /* Quote block */
+        .quote {
+            font-family: var(--font-display);
+            font-weight: 300;
+            font-size: clamp(1.1rem, 2.5vw, 2rem);
+            line-height: 1.4;
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent-sage);
+            padding-left: clamp(0.8rem, 2vw, 1.5rem);
+        }
+        .slide--dark .quote { color: var(--text-on-accent); }
+        .quote-attribution {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            margin-top: clamp(0.5rem, 1vh, 1rem);
+        }
+
+        /* Two-column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(1rem, 3vw, 3rem);
+            align-items: start;
+        }
+        @media (max-width: 700px) {
+            .two-col { grid-template-columns: 1fr; }
+        }
+
+        /* ===========================================
+           REVEAL ANIMATIONS
+           Triggered via .visible class on parent .slide
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered delays */
+        .reveal-d1 { transition-delay: 0.1s; }
+        .reveal-d2 { transition-delay: 0.2s; }
+        .reveal-d3 { transition-delay: 0.3s; }
+        .reveal-d4 { transition-delay: 0.4s; }
+        .reveal-d5 { transition-delay: 0.5s; }
+        .reveal-d6 { transition-delay: 0.6s; }
+
+        /* ===========================================
+           PROGRESS BAR
+           =========================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            background: var(--accent-sage);
+            z-index: 9999;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        /* ===========================================
+           NAVIGATION DOTS
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: clamp(0.8rem, 1.5vw, 1.5rem);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.3rem, 0.5vh, 0.5rem);
+            z-index: 9998;
+        }
+        .nav-dot {
+            width: clamp(6px, 0.6vw, 9px);
+            height: clamp(6px, 0.6vw, 9px);
+            border-radius: 50%;
+            background: rgba(44, 62, 58, 0.15);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            border: none;
+            padding: 0;
+        }
+        .nav-dot:hover { transform: scale(1.3); }
+        .nav-dot.active { background: var(--accent-sage); transform: scale(1.2); }
+
+        /* Invert dots on dark slides */
+        .nav-dots.on-dark .nav-dot { background: rgba(255, 255, 255, 0.2); }
+        .nav-dots.on-dark .nav-dot.active { background: var(--accent-sage); }
+
+        /* ===========================================
+           KEYBOARD HINT
+           =========================================== */
+        .keyboard-hint {
+            position: fixed;
+            bottom: clamp(0.8rem, 1.5vh, 1.5rem);
+            left: 50%; transform: translateX(-50%);
+            font-size: var(--small-size);
+            color: rgba(44, 62, 58, 0.3);
+            z-index: 9998;
+            transition: opacity 2s ease;
+        }
+
+        /* ===========================================
+           INLINE EDITING
+           =========================================== */
+        .edit-hotzone {
+            position: fixed; top: 0; left: 0;
+            width: 80px; height: 80px;
+            z-index: 10000;
+            cursor: pointer;
+        }
+        .edit-toggle {
+            position: fixed;
+            top: clamp(0.5rem, 1vh, 1rem);
+            left: clamp(0.5rem, 1vw, 1rem);
+            background: var(--bg-accent);
+            color: var(--text-on-accent);
+            border: none; border-radius: 100px;
+            padding: clamp(0.3rem, 0.5vh, 0.5rem) clamp(0.6rem, 1vw, 1rem);
+            font-family: var(--font-body);
+            font-size: var(--small-size);
+            font-weight: 600;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 10001;
+        }
+        .edit-toggle.show,
+        .edit-toggle.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .edit-banner {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: var(--accent-sage);
+            color: var(--text-primary);
+            text-align: center;
+            padding: clamp(0.2rem, 0.4vh, 0.4rem);
+            font-size: var(--small-size);
+            font-weight: 600;
+            z-index: 10002;
+        }
+        .edit-banner.show { display: block; }
+        [contenteditable="true"] {
+            outline: 2px dashed var(--accent-sage);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        /* ===========================================
+           SLIDE-SPECIFIC LAYOUTS
+           =========================================== */
+
+        /* Title slide — centered */
+        .title-slide .slide-content {
+            align-items: center;
+            text-align: center;
+        }
+        .title-slide h1 { margin-bottom: clamp(0.5rem, 1.5vh, 1.2rem); }
+        .title-slide .subtitle { margin-bottom: clamp(1rem, 2.5vh, 2rem); }
+
+        /* Content slide — left-aligned */
+        .content-slide .slide-content {
+            max-width: min(90vw, 800px);
+            margin: 0 auto;
+        }
+        .content-slide h2 { margin-bottom: clamp(0.8rem, 2vh, 1.5rem); }
+
+        /* Grid slide */
+        .grid-slide .slide-content {
+            max-width: min(95vw, 1100px);
+            margin: 0 auto;
+        }
+        .grid-slide h2 { margin-bottom: clamp(0.8rem, 2vh, 1.5rem); }
+
+        /* Two-col slide */
+        .twocol-slide .slide-content {
+            max-width: min(95vw, 1100px);
+            margin: 0 auto;
+        }
+        .twocol-slide h2 { margin-bottom: clamp(0.8rem, 2vh, 1.5rem); }
+
+        /* Quote slide */
+        .quote-slide .slide-content {
+            max-width: min(80vw, 750px);
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+
+        /* Closing slide */
+        .closing-slide .slide-content {
+            align-items: center;
+            text-align: center;
+        }
+
+        /* ===========================================
+           IMAGE SLIDES
+           Photo + content layouts
+           =========================================== */
+        .slide-image {
+            max-width: 100%;
+            max-height: min(50vh, 400px);
+            object-fit: cover;
+            border-radius: clamp(8px, 1.2vw, 16px);
+            border: 1px solid var(--bg-card-border);
+        }
+        .slide--dark .slide-image {
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Image-text side by side layout */
+        .image-text-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(1.5rem, 3vw, 3rem);
+            align-items: center;
+            max-width: min(95vw, 1100px);
+            margin: 0 auto;
+        }
+        .image-text-layout .slide-image {
+            width: 100%;
+            max-height: min(55vh, 450px);
+        }
+        @media (max-width: 700px) {
+            .image-text-layout {
+                grid-template-columns: 1fr;
+            }
+            .image-text-layout .slide-image {
+                max-height: min(30vh, 200px);
+            }
+        }
+
+        /* Title slide with background image */
+        .title-hero {
+            position: relative;
+        }
+        .title-hero .hero-image-wrap {
+            position: absolute;
+            top: 0; right: 0;
+            width: 45%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .title-hero .hero-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-height: none;
+            border-radius: 0;
+            border: none;
+        }
+        .title-hero .hero-image-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--bg-primary) 0%, rgba(244, 240, 232, 0.3) 50%, transparent 100%);
+        }
+        .title-hero .slide-content {
+            position: relative;
+            z-index: 1;
+            align-items: flex-start;
+            text-align: left;
+            max-width: 55%;
+        }
+        @media (max-width: 700px) {
+            .title-hero .hero-image-wrap { width: 100%; opacity: 0.25; }
+            .title-hero .hero-image-wrap::after {
+                background: linear-gradient(to right, var(--bg-primary) 0%, rgba(244, 240, 232, 0.6) 100%);
+            }
+            .title-hero .slide-content { max-width: 100%; }
+        }
+
+        /* Closing with background image */
+        .closing-hero {
+            position: relative;
+        }
+        .closing-hero .hero-image-wrap {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .closing-hero .hero-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-height: none;
+            border-radius: 0;
+            border: none;
+        }
+        .closing-hero .hero-image-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(44, 62, 58, 0.8);
+        }
+        .closing-hero .slide-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Photo credit */
+        .photo-credit {
+            position: absolute;
+            bottom: clamp(0.3rem, 0.8vh, 0.8rem);
+            right: clamp(0.5rem, 1vw, 1rem);
+            font-size: clamp(0.4rem, 0.5vw, 0.5rem);
+            color: rgba(44, 62, 58, 0.3);
+            z-index: 2;
+        }
+        .slide--dark .photo-credit { color: rgba(255, 255, 255, 0.2); }
+    </style>
+</head>
+<body>
+
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Navigation dots -->
+    <nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+
+    <!-- Keyboard hint -->
+    <div class="keyboard-hint decorative" id="keyboardHint">Arrow keys or scroll to navigate</div>
+
+    <!-- Edit mode hotzone and toggle -->
+    <div class="edit-hotzone" id="editHotzone"></div>
+    <button class="edit-toggle" id="editToggle" title="Edit mode (E)">Edit</button>
+    <div class="edit-banner" id="editBanner">Edit Mode — Click any text to edit &middot; Ctrl+S to save</div>
+
+    <!-- ===========================================
+         SLIDE 1: TITLE
+         =========================================== -->
+    <section class="slide title-slide title-hero" aria-label="Title">
+        <div class="hero-image-wrap reveal">
+            <img src="https://images.pexels.com/photos/1307630/pexels-photo-1307630.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Rottweiler puppy sitting on grass">
+        </div>
+        <div class="slide-content">
+            <div class="tag reveal"><div class="tag-dot"></div> Training Guide</div>
+            <h1 class="reveal reveal-d1">Rottweiler<br>Puppy Training</h1>
+            <p class="subtitle reveal reveal-d2">Practical, positive methods for raising a confident, well-behaved companion from day one.</p>
+            <div class="badges reveal reveal-d3">
+                <div class="badge"><div class="badge-dot" style="background: var(--accent-green)"></div> Socialization</div>
+                <div class="badge"><div class="badge-dot" style="background: var(--accent-gold)"></div> Commands</div>
+                <div class="badge"><div class="badge-dot" style="background: var(--accent-blue)"></div> Crate Training</div>
+                <div class="badge"><div class="badge-dot" style="background: var(--accent-brown)"></div> Reinforcement</div>
+            </div>
+        </div>
+        <span class="photo-credit">Photo: Lukas Kloeppel / Pexels</span>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 2: WHY ROTTWEILERS
+         =========================================== -->
+    <section class="slide" aria-label="Why Rottweilers">
+        <div class="slide-content">
+            <div class="section-num reveal">01</div>
+            <div class="image-text-layout">
+                <div>
+                    <h2 class="reveal reveal-d1">Why Rottweilers Are Special</h2>
+                    <p class="subtitle reveal reveal-d2" style="margin-bottom: clamp(0.8rem, 2vh, 1.5rem);">Rottweilers are intelligent, loyal, and eager to please. With the right training, they become exceptional family dogs.</p>
+                    <ul class="content-list reveal reveal-d3">
+                        <li>Ranked among the top 10 most intelligent breeds</li>
+                        <li>Naturally protective — training channels this instinct positively</li>
+                        <li>Strong bond with their owner makes them highly trainable</li>
+                        <li>Require consistent leadership, not dominance</li>
+                    </ul>
+                </div>
+                <img src="https://images.pexels.com/photos/13569321/pexels-photo-13569321.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rottweiler close-up portrait" class="slide-image reveal reveal-d2">
+            </div>
+        </div>
+        <span class="photo-credit">Photo: Pexels</span>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 3: BEFORE YOU BEGIN
+         =========================================== -->
+    <section class="slide grid-slide" aria-label="Before You Begin">
+        <div class="slide-content">
+            <div class="section-num reveal">02</div>
+            <h2 class="reveal reveal-d1">Before You Begin</h2>
+            <div class="grid reveal reveal-d2" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));">
+                <div class="feature-card">
+                    <div class="feature-card-icon" style="background: rgba(90, 138, 108, 0.15); color: var(--accent-green);">&#9878;</div>
+                    <h3>Vet Check</h3>
+                    <p>Schedule a vet visit within the first 48 hours of bringing your puppy home.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon" style="background: rgba(160, 144, 96, 0.15); color: var(--accent-gold);">&#9733;</div>
+                    <h3>Supplies</h3>
+                    <p>Crate, collar, leash, food bowls, quality puppy food, and chew toys.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon" style="background: rgba(106, 138, 154, 0.15); color: var(--accent-blue);">&#9962;</div>
+                    <h3>Safe Space</h3>
+                    <p>Puppy-proof one room. Remove cords, toxins, small objects from reach.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon" style="background: rgba(154, 122, 90, 0.15); color: var(--accent-brown);">&#9997;</div>
+                    <h3>Ground Rules</h3>
+                    <p>Entire household agrees on commands, boundaries, and feeding schedule.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 4: THE FIRST WEEK HOME
+         =========================================== -->
+    <section class="slide content-slide" aria-label="First Week Home">
+        <div class="slide-content">
+            <div class="section-num reveal">03</div>
+            <h2 class="reveal reveal-d1">The First Week Home</h2>
+            <p class="subtitle reveal reveal-d2" style="margin-bottom: clamp(0.8rem, 2vh, 1.5rem);">Your puppy just left their litter. Everything is new and overwhelming. Patience is everything.</p>
+            <ul class="content-list reveal reveal-d3">
+                <li>Keep the environment calm — limit visitors for the first few days</li>
+                <li>Establish a consistent routine: meals, potty, play, nap</li>
+                <li>Let your puppy explore at their own pace — no forcing</li>
+                <li>Sleep near the crate for the first few nights to reduce anxiety</li>
+                <li>Begin name recognition — say their name and reward attention</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 5: SOCIALIZATION (DARK)
+         =========================================== -->
+    <section class="slide slide--dark" aria-label="Socialization Window">
+        <div class="slide-content">
+            <div class="section-num reveal">04</div>
+            <div class="image-text-layout">
+                <div>
+                    <h2 class="reveal reveal-d1">The Socialization Window</h2>
+                    <p class="subtitle reveal reveal-d2" style="margin-bottom: clamp(0.8rem, 2vh, 1.5rem);">Between 3 and 14 weeks, your puppy's brain is wired to accept new experiences. This is the most critical training period.</p>
+                    <ul class="content-list reveal reveal-d3">
+                        <li>Expose to different people: ages, appearances, hats, uniforms</li>
+                        <li>Introduce various sounds: vacuum, traffic, doorbell, thunder recordings</li>
+                        <li>Visit different surfaces: grass, tile, gravel, metal grates</li>
+                        <li>Meet vaccinated, friendly dogs in controlled settings</li>
+                    </ul>
+                </div>
+                <img src="https://images.pexels.com/photos/264005/pexels-photo-264005.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rottweiler puppy running outdoors with owner" class="slide-image reveal reveal-d2">
+            </div>
+        </div>
+        <span class="photo-credit">Photo: Pexels</span>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 6: SOCIALIZATION TIPS
+         =========================================== -->
+    <section class="slide twocol-slide" aria-label="Socialization Tips">
+        <div class="slide-content">
+            <div class="section-num reveal">05</div>
+            <h2 class="reveal reveal-d1">Socialization Done Right</h2>
+            <div class="two-col reveal reveal-d2">
+                <div>
+                    <h3 style="color: var(--accent-green); margin-bottom: clamp(0.4rem, 1vh, 0.8rem);">Do</h3>
+                    <ul class="content-list">
+                        <li>Keep exposures short and positive</li>
+                        <li>Reward calm, curious behavior with treats</li>
+                        <li>Let your puppy retreat if scared — never force</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: var(--accent-brown); margin-bottom: clamp(0.4rem, 1vh, 0.8rem);">Don't</h3>
+                    <ul class="content-list">
+                        <li>Overwhelm with too many new things at once</li>
+                        <li>Visit dog parks before vaccinations are complete</li>
+                        <li>Comfort fearful behavior — redirect instead</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 7: BASIC COMMANDS
+         =========================================== -->
+    <section class="slide grid-slide" aria-label="Basic Commands">
+        <div class="slide-content">
+            <div class="section-num reveal">06</div>
+            <h2 class="reveal reveal-d1">Essential Commands</h2>
+            <div class="grid reveal reveal-d2" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));">
+                <div class="feature-card">
+                    <h3 style="color: var(--accent-green);">Sit</h3>
+                    <p>Hold treat above nose, move it back over head. Mark and reward the moment their rear hits the ground.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 style="color: var(--accent-gold);">Stay</h3>
+                    <p>Ask for sit, open palm signal, take one step back. Return and reward. Gradually increase distance.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 style="color: var(--accent-blue);">Come</h3>
+                    <p>Start on a long leash. Say name + "come" in an excited voice. Reward generously every single time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 8: MORE COMMANDS
+         =========================================== -->
+    <section class="slide grid-slide" aria-label="More Commands">
+        <div class="slide-content">
+            <div class="section-num reveal">07</div>
+            <h2 class="reveal reveal-d1">Building the Repertoire</h2>
+            <div class="grid reveal reveal-d2" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));">
+                <div class="feature-card">
+                    <h3 style="color: var(--accent-brown);">Down</h3>
+                    <p>From sit, lure treat to floor between paws. Mark and reward when elbows touch the ground.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 style="color: var(--accent-green);">Leave It</h3>
+                    <p>Close treat in fist. When puppy stops trying, mark and reward with a different treat from other hand.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 style="color: var(--accent-blue);">Drop It</h3>
+                    <p>Offer a high-value trade. Never chase your puppy — make giving things up always rewarding.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 9: CRATE TRAINING (DARK)
+         =========================================== -->
+    <section class="slide content-slide slide--dark" aria-label="Crate Training">
+        <div class="slide-content">
+            <div class="section-num reveal">08</div>
+            <h2 class="reveal reveal-d1">Crate Training</h2>
+            <p class="subtitle reveal reveal-d2" style="margin-bottom: clamp(0.8rem, 2vh, 1.5rem);">The crate is a safe den, not a punishment. Done right, your puppy will choose to rest there voluntarily.</p>
+            <ul class="content-list reveal reveal-d3">
+                <li>Start with door open — toss treats inside, let puppy explore freely</li>
+                <li>Feed meals in the crate to build positive associations</li>
+                <li>Close door briefly while they eat, then open immediately</li>
+                <li>Gradually extend closed-door time: 5 min, 15 min, 30 min</li>
+                <li>Never use the crate as punishment — ever</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 10: HOUSE TRAINING
+         =========================================== -->
+    <section class="slide content-slide" aria-label="House Training">
+        <div class="slide-content">
+            <div class="section-num reveal">09</div>
+            <h2 class="reveal reveal-d1">House Training</h2>
+            <p class="subtitle reveal reveal-d2" style="margin-bottom: clamp(0.8rem, 2vh, 1.5rem);">Consistency is the secret. Puppies need to go out far more often than you think.</p>
+            <ul class="content-list reveal reveal-d3">
+                <li>Take outside immediately after waking, eating, playing, and napping</li>
+                <li>Every 1-2 hours during the day for puppies under 12 weeks</li>
+                <li>Same door, same spot, same praise word every time</li>
+                <li>Reward outside immediately — not after coming back in</li>
+                <li>Accidents happen — clean with enzymatic cleaner, never punish</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 11: LEASH TRAINING
+         =========================================== -->
+    <section class="slide" aria-label="Leash Training">
+        <div class="slide-content">
+            <div class="section-num reveal">10</div>
+            <div class="image-text-layout">
+                <div>
+                    <h2 class="reveal reveal-d1">Leash Training</h2>
+                    <p class="subtitle reveal reveal-d2" style="margin-bottom: clamp(0.5rem, 1.5vh, 1rem);">Rottweilers are strong dogs. Teaching loose-leash walking early prevents a lifetime of pulling.</p>
+                    <ul class="content-list reveal reveal-d3">
+                        <li>Let puppy wear collar and drag leash indoors first</li>
+                        <li>Start indoors with no distractions</li>
+                        <li>When leash goes tight, stop completely and wait</li>
+                        <li>Mark and reward loose-leash walking generously</li>
+                        <li>Be patient — this takes weeks, not days</li>
+                    </ul>
+                </div>
+                <img src="https://images.pexels.com/photos/8327652/pexels-photo-8327652.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rottweiler sitting on leash beside owner in park" class="slide-image reveal reveal-d2">
+            </div>
+        </div>
+        <span class="photo-credit">Photo: Pexels</span>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 12: BITE INHIBITION
+         =========================================== -->
+    <section class="slide content-slide" aria-label="Bite Inhibition">
+        <div class="slide-content">
+            <div class="section-num reveal">11</div>
+            <h2 class="reveal reveal-d1">Bite Inhibition</h2>
+            <p class="subtitle reveal reveal-d2" style="margin-bottom: clamp(0.8rem, 2vh, 1.5rem);">Puppy mouthing is normal — not aggression. Teaching soft mouth now prevents problems later.</p>
+            <ul class="content-list reveal reveal-d3">
+                <li>When teeth touch skin, say "ouch" calmly and withdraw attention for 10 seconds</li>
+                <li>Redirect to an appropriate chew toy immediately</li>
+                <li>End play if mouthing continues — puppies learn that biting = fun stops</li>
+                <li>Never use your hands as toys — always use a toy between you and their mouth</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 13: POSITIVE REINFORCEMENT (DARK)
+         =========================================== -->
+    <section class="slide quote-slide slide--dark" aria-label="Positive Reinforcement">
+        <div class="slide-content">
+            <div class="section-num reveal">12</div>
+            <h2 class="reveal reveal-d1">The Power of Positive Reinforcement</h2>
+            <blockquote class="quote reveal reveal-d2">
+                Reward what you want to see more of. Ignore or redirect what you don't. Punishment teaches fear — reinforcement builds trust.
+            </blockquote>
+            <div class="badges reveal reveal-d3" style="margin-top: clamp(1rem, 2.5vh, 2rem);">
+                <div class="badge"><div class="badge-dot" style="background: var(--accent-sage);"></div> Treats</div>
+                <div class="badge"><div class="badge-dot" style="background: var(--accent-gold);"></div> Praise</div>
+                <div class="badge"><div class="badge-dot" style="background: var(--accent-blue);"></div> Play</div>
+                <div class="badge"><div class="badge-dot" style="background: var(--accent-brown);"></div> Timing</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 14: COMMON MISTAKES
+         =========================================== -->
+    <section class="slide grid-slide" aria-label="Common Mistakes">
+        <div class="slide-content">
+            <div class="section-num reveal">13</div>
+            <h2 class="reveal reveal-d1">Common Mistakes to Avoid</h2>
+            <div class="grid reveal reveal-d2" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="feature-card">
+                    <h3>Inconsistency</h3>
+                    <p>Rules must be the same every day, from every family member. Mixed signals confuse fast learners.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Skipping Socialization</h3>
+                    <p>An unsocialized Rottweiler can become fearful and reactive. The window closes fast — use it.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Too Much, Too Soon</h3>
+                    <p>Keep training sessions short: 5 minutes, 3-5 times a day. Puppies have short attention spans.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Physical Punishment</h3>
+                    <p>Hitting, alpha rolls, and dominance theory damage trust. Modern science favors positive methods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 15: CLOSING
+         =========================================== -->
+    <section class="slide closing-slide slide--dark closing-hero" aria-label="Closing">
+        <div class="hero-image-wrap">
+            <img src="https://images.pexels.com/photos/2867230/pexels-photo-2867230.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Rottweiler puppy being petted">
+        </div>
+        <div class="slide-content">
+            <div class="tag reveal"><div class="tag-dot"></div> Let's Begin</div>
+            <h1 class="reveal reveal-d1">Your Journey<br>Starts Now</h1>
+            <p class="subtitle reveal reveal-d2" style="max-width: min(70vw, 550px);">Every great Rottweiler was once a clumsy puppy with an owner who showed up every day. Be patient, be consistent, and enjoy the ride.</p>
+            <div class="badges reveal reveal-d3" style="margin-top: clamp(0.5rem, 1.5vh, 1rem);">
+                <div class="badge"><div class="badge-dot" style="background: var(--accent-sage);"></div> Trust the process</div>
+                <div class="badge"><div class="badge-dot" style="background: var(--accent-gold);"></div> Celebrate small wins</div>
+                <div class="badge"><div class="badge-dot" style="background: var(--accent-blue);"></div> Have fun</div>
+            </div>
+        </div>
+        <span class="photo-credit">Photo: Pexels</span>
+    </section>
+
+    <script>
+        /* ===========================================
+           SLIDE PRESENTATION CONTROLLER
+           =========================================== */
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.currentSlide = 0;
+                this.isScrolling = false;
+
+                this.setupIntersectionObserver();
+                this.setupKeyboardNav();
+                this.setupTouchNav();
+                this.setupProgressBar();
+                this.setupNavDots();
+                this.hideKeyboardHint();
+            }
+
+            /* --- Intersection Observer: trigger .visible on scroll --- */
+            setupIntersectionObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            const index = Array.from(this.slides).indexOf(entry.target);
+                            if (index !== -1) {
+                                this.currentSlide = index;
+                                this.updateNavDots();
+                                this.updateProgressBar();
+                                this.updateNavDotsTheme();
+                            }
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                this.slides.forEach(slide => observer.observe(slide));
+            }
+
+            /* --- Keyboard Navigation --- */
+            setupKeyboardNav() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.target.getAttribute('contenteditable')) return;
+                    switch(e.key) {
+                        case 'ArrowDown':
+                        case 'ArrowRight':
+                        case ' ':
+                        case 'PageDown':
+                            e.preventDefault();
+                            this.goToSlide(this.currentSlide + 1);
+                            break;
+                        case 'ArrowUp':
+                        case 'ArrowLeft':
+                        case 'PageUp':
+                            e.preventDefault();
+                            this.goToSlide(this.currentSlide - 1);
+                            break;
+                        case 'Home':
+                            e.preventDefault();
+                            this.goToSlide(0);
+                            break;
+                        case 'End':
+                            e.preventDefault();
+                            this.goToSlide(this.slides.length - 1);
+                            break;
+                    }
+                });
+            }
+
+            /* --- Touch/Swipe Navigation --- */
+            setupTouchNav() {
+                let startY = 0;
+                document.addEventListener('touchstart', (e) => {
+                    startY = e.touches[0].clientY;
+                }, { passive: true });
+                document.addEventListener('touchend', (e) => {
+                    const diff = startY - e.changedTouches[0].clientY;
+                    if (Math.abs(diff) > 50) {
+                        this.goToSlide(this.currentSlide + (diff > 0 ? 1 : -1));
+                    }
+                }, { passive: true });
+            }
+
+            /* --- Progress Bar --- */
+            setupProgressBar() {
+                this.progressBar = document.getElementById('progressBar');
+                this.updateProgressBar();
+            }
+            updateProgressBar() {
+                if (!this.progressBar) return;
+                const progress = ((this.currentSlide + 1) / this.slides.length) * 100;
+                this.progressBar.style.width = progress + '%';
+            }
+
+            /* --- Navigation Dots --- */
+            setupNavDots() {
+                const container = document.getElementById('navDots');
+                if (!container) return;
+                this.slides.forEach((_, i) => {
+                    const dot = document.createElement('button');
+                    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    container.appendChild(dot);
+                });
+            }
+            updateNavDots() {
+                const dots = document.querySelectorAll('.nav-dot');
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === this.currentSlide);
+                });
+            }
+            updateNavDotsTheme() {
+                const nav = document.getElementById('navDots');
+                if (!nav) return;
+                const currentSlide = this.slides[this.currentSlide];
+                nav.classList.toggle('on-dark', currentSlide.classList.contains('slide--dark'));
+            }
+
+            /* --- Navigate to Slide --- */
+            goToSlide(index) {
+                if (index < 0 || index >= this.slides.length) return;
+                this.slides[index].scrollIntoView({ behavior: 'smooth' });
+            }
+
+            /* --- Hide keyboard hint after first interaction --- */
+            hideKeyboardHint() {
+                const hint = document.getElementById('keyboardHint');
+                if (!hint) return;
+                const hide = () => {
+                    hint.style.opacity = '0';
+                    setTimeout(() => hint.style.display = 'none', 2000);
+                };
+                document.addEventListener('keydown', hide, { once: true });
+                document.addEventListener('click', hide, { once: true });
+                document.addEventListener('touchstart', hide, { once: true });
+            }
+        }
+
+        /* ===========================================
+           INLINE EDITOR
+           =========================================== */
+        class InlineEditor {
+            constructor() {
+                this.isActive = false;
+                this.editToggle = document.getElementById('editToggle');
+                this.editBanner = document.getElementById('editBanner');
+                this.editableSelectors = 'h1, h2, h3, p, li, blockquote';
+                this.storageKey = 'rottweiler-training-edits-v2';
+
+                this.setupHotzone();
+                this.setupKeyboard();
+                this.loadEdits();
+            }
+
+            /* Hotzone hover with 400ms delay */
+            setupHotzone() {
+                const hotzone = document.getElementById('editHotzone');
+                let hideTimeout = null;
+
+                hotzone.addEventListener('mouseenter', () => {
+                    clearTimeout(hideTimeout);
+                    this.editToggle.classList.add('show');
+                });
+                hotzone.addEventListener('mouseleave', () => {
+                    hideTimeout = setTimeout(() => {
+                        if (!this.isActive) this.editToggle.classList.remove('show');
+                    }, 400);
+                });
+                this.editToggle.addEventListener('mouseenter', () => {
+                    clearTimeout(hideTimeout);
+                });
+                this.editToggle.addEventListener('mouseleave', () => {
+                    hideTimeout = setTimeout(() => {
+                        if (!this.isActive) this.editToggle.classList.remove('show');
+                    }, 400);
+                });
+                hotzone.addEventListener('click', () => this.toggleEditMode());
+                this.editToggle.addEventListener('click', () => this.toggleEditMode());
+            }
+
+            /* E key shortcut */
+            setupKeyboard() {
+                document.addEventListener('keydown', (e) => {
+                    if ((e.key === 'e' || e.key === 'E') && !e.target.getAttribute('contenteditable')) {
+                        this.toggleEditMode();
+                    }
+                    if (e.ctrlKey && e.key === 's') {
+                        e.preventDefault();
+                        this.saveEdits();
+                    }
+                });
+            }
+
+            toggleEditMode() {
+                this.isActive = !this.isActive;
+                this.editToggle.classList.toggle('active', this.isActive);
+                this.editToggle.textContent = this.isActive ? 'Done' : 'Edit';
+                this.editBanner.classList.toggle('show', this.isActive);
+
+                document.querySelectorAll(this.editableSelectors).forEach(el => {
+                    if (this.isActive) {
+                        el.setAttribute('contenteditable', 'true');
+                    } else {
+                        el.removeAttribute('contenteditable');
+                    }
+                });
+
+                if (!this.isActive) this.saveEdits();
+            }
+
+            saveEdits() {
+                const edits = {};
+                document.querySelectorAll(this.editableSelectors).forEach((el, i) => {
+                    edits[i] = el.innerHTML;
+                });
+                localStorage.setItem(this.storageKey, JSON.stringify(edits));
+            }
+
+            loadEdits() {
+                const saved = localStorage.getItem(this.storageKey);
+                if (!saved) return;
+                try {
+                    const edits = JSON.parse(saved);
+                    document.querySelectorAll(this.editableSelectors).forEach((el, i) => {
+                        if (edits[i] !== undefined) el.innerHTML = edits[i];
+                    });
+                } catch(e) { /* ignore parse errors */ }
+            }
+        }
+
+        /* ===========================================
+           INITIALIZE
+           =========================================== */
+        const presentation = new SlidePresentation();
+        const editor = new InlineEditor();
+    </script>
+</body>
+</html>
